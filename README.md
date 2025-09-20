@@ -1,8 +1,8 @@
 # Music Event Application
-
 Music event website for logging / registering accounts, event viewing and creation, and for booking tickets to events. The project is developed using a mix of Python, HTML, and SQL.
+This was developed as a group project. 
 
-This was a group project, with my achievements being:
+# My Responsibilities
 - Implemented the user registration and login
 - CSS styling of the pages
 - Added the user id and ervent details to the booking page
