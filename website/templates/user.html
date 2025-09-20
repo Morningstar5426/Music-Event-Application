@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% from "bootstrap5/form.html" import render_form %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+<div class="container1">
+    <div class="row mt-5 mb-3">
+        <div class="col-md-12">
+            <div class="float-left">
+                <h1 class="mb-0"><center>{{ heading }}</center></h1>
+            </div>
+            <div class="float-right text-right">
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="page-header">
+                <h4>{{ heading }}</h4>
+            </div>
+            {{ render_form(form) }}
+
+            <!-- When you have a login form, show the user a link to register -->
+            {% if heading|lower == 'login' %}
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p class="mt-3">New user? <a href="{{ url_for('auth.register') }}">Click here to register</a>.</p>
+                    <div style="margin-bottom: 56%;"></div>
+                </div>
+            </div>
+            {% endif %}
+            <div style="margin-bottom: 14%;"></div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

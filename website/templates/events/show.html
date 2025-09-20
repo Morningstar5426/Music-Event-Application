@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<div class="container1">  
+    <div class="row mt-5 mb-3">  
+      <div class="col-md-12">  
+        <div class="float-left">  
+          <h1 class="mb-0"><center>{{event.name}}</center></h1>  
+        </div>  
+ 
+        <div class="float-right text-right">  
+ 
+        </div>  
+      </div>  
+    </div>  
+ 
+    <!-- Displays the event details and links them to the database variables -->
+    <div class="row">  
+      <div class="col-md-12">  
+        <div class="card my-3" style="max-width: 100%;">  
+          <div class="card-body">  
+            <div class="media">  
+              <img class="img-fluid mb-3" src="{{ event.image }}" alt="{{ event.name }}" style="max-width: 100%; height: auto;">
+              <div class="media-body">  
+                <hr> 
+                <a href="{{ url_for('event.update_event', id=event.id) }}" class="btn btn-primary">Edit Event</a>
+                        <p><strong>Status:</strong>
+                          {% if event.status == 'Open' %}
+                              <span class="status-open">{{ event.status }}</span>
+                          {% elif event.status == 'Inactive' %}
+                              <span class="status-inactive">{{ event.status }}</span>
+                          {% elif event.status == 'Cancelled' %}
+                              <span class="status-cancelled">{{ event.status }}</span>
+                          {% endif %}
+                        </p>
+                        <hr> 
+                        <p><strong>Genre:</strong></p>
+                          <p>{{ event.genre }}</p>
+                        <hr> 
+                        <p><strong>Description:</strong></p>
+                          <p>{{ event.description }}</p>
+                        <hr> 
+                        <p><strong>Artist/s:</strong> {{ event.artist }}</p>
+                        
+                        <hr>
+                        <p><strong>Date:</strong> {{ event.date.strftime("%B %d, %Y")}}</p>
+
+                        <hr>
+                        <p><strong>Start Time:</strong> {{ event.start_time }}</p>
+                        <hr> 
+                        <p><strong>End Time:</strong> {{ event.end_time }}</p>
+                        <hr> 
+                         
+                        <p><strong>Location:</strong> {{ event.location }}</p>
+                        <hr> 
+                        <p><strong>Attendees:</strong> {{ event.attendees }}</p>
+                        <hr> 
+                        <p><strong>Tickets:</strong> {{ event.tickets }}</p>
+                        <hr>
+                        <!-- Button for creating an event -->
+                        <form method="post" enctype="multipart/form-data">
+                          {{ booking_form.hidden_tag() }}
+                          <div class="mb-2">
+                            {{ booking_form.ticket_type.label(class="form-label") }}
+                            {{ booking_form.ticket_type(class="form-select") }}
+                          </div>
+                          <!-- Number of Tickets Input -->
+                          <div class="mb-2">
+                            {{ booking_form.number_of_tickets.label(class="form-label") }}
+                            {{ booking_form.number_of_tickets(class="form-control", id="ticket-quantity") }}
+                          </div>
+                          <!-- Submit Button for Booking -->
+                          <button type="submit" class="btn btn-danger">Book Now</button>
+                        </form>
+                        
+                
+              </div>  
+            </div>  
+          </div>  
+        </div>  
+      </div>  
+    </div>
+    <hr>
+    <!-- Comments -->  
+    <div class="row">  
+      <div class="col-md-12">  
+        <h2>Comments</h2>  
+      </div>  
+    </div>  
+    <!-- Displays the saved comments from the database -->
+    <div class="row border-bottom">
+      {{ render_form(form, "/events/{0}/comment".format(event.id)) }}
+      {% for comment in event.comments %}
+      <div style="margin-bottom: 20px;"></div>
+    <div class="col-md-12">
+        <b>{{ comment.user.name }} <span class="ml-2 text-muted">{{ comment.timestamp.strftime("|| %B %d, %Y || %H:%M:%S UTC") }}</span></b>
+        <p>{{ comment.text }}</p>
+        
+    </div>
+{% endfor %}
+    </div>
+  </div> 
+
+{% endblock %}

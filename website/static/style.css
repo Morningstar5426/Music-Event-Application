@@ -1,0 +1,263 @@
+/* General Styles */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 15px;
+}
+
+/* Header Section */
+header.container {
+  text-align: center;
+  justify-content: flex-start;
+}
+
+.upcoming-events-title {
+  text-align: left; /* Align text to the left */
+  padding-left: 15px; /* Add padding to the lef */
+}
+
+.title {
+  text-align: center;
+}
+
+.title1 {
+  text-align: center;
+}
+.subhead {
+  text-align: center;
+}
+
+.bg-purple {
+  background-color: #86b5e7; /* Example: Bootstrap's blue */
+}
+
+/* Dropdown alignment */
+.left-dropdown {
+  margin-left: 0 !important;
+  justify-content: start;
+}
+
+/* Navbar styles */
+.navbar {
+  padding-top: 1rem; /* This increases the top padding. Adjust the value as needed */
+  padding-bottom: 1rem; /* This increases the bottom padding. Adjust the value as needed */
+}
+
+.navbar-brand {
+  position: relative; /* Changed from absolute to relative */
+  left: 0; /* Align to the very left */
+  transform: none; /* Remove the centering transform */
+  font-size: 1em; /* Smaller font size */
+  margin-right: 1em; /* Add some space after the title */
+}
+
+/* Adjustments for the navbar-toggler when the title is at the left */
+@media (max-width: 991px) {
+  .navbar-toggler {
+    position: absolute;
+    right: 0;
+    z-index: 2;
+  }
+}
+
+/* ... other existing styles ... */
+
+/* Search Form Styles */
+.search-form {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.search-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  margin-right: 5px;
+  flex-grow: 1;
+}
+
+.search-button {
+  padding: 10px 20px;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+}
+
+.btn-outline-success {
+  color: #007bffa4; /* Text color */
+  background-color: #ffffff; /* Background color */
+  border-color: #0037ff; /* Border color */
+}
+
+.btn-outline-success:hover {
+  color: #ffffff; /* Text color on hover */
+  background-color: #007bff; /* Background color on hover */
+  border-color: #007bff; /* Border color on hover */
+}
+
+/* ... rest of your existing styles ... */
+
+/* Upcoming Events Section */
+#upcoming-events h2 {
+  text-align: center;
+  font-size: 50px;
+}
+
+.card {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 15px;
+  text-align: center;
+}
+
+.category-card {
+  display: block;
+  text-align: center;
+  padding: 20px; /* Provide enough padding */
+  margin: 10px 0; /* Maintain vertical space between cards */
+  background-color: #f7f7f7;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 150px; /* Ensures all cards are at least this tall */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.category-card:hover {
+  text-align: center;
+  transform: scale(1.05); /* Scales the card to 105% of its original size */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow to give depth */
+}
+
+.category-card:hover {
+  background-color: #eaeaea;
+}
+
+.bg-booking-header th {
+  background-color: #9ba7b4; /* Light blue color */
+}
+.container .card.shadow-sm:hover {
+  transform: none; /* Removes scaling effect */
+  box-shadow: none; /* Removes shadow change on hover */
+}
+
+
+.table tr:hover {
+  background-color: inherit; 
+}
+
+.tablebook th {
+  transition: none;
+}
+
+.btn-primary {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+/* About Section */
+.upcoming-events-title {
+  text-align: left; /* Align text to the left */
+  padding-left: 15px; /* Add padding to the left */
+  font-size: 10px;
+}
+
+/* Testimonials Section */
+#testimonials {
+  text-align: center;
+}
+
+.testimonial {
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.testimonial p {
+  font-style: italic;
+}
+
+.testimonial footer {
+  font-weight: bold;
+  color: #333;
+}
+
+/*EVENT STATUS*/
+.status {
+  font-weight: bold;
+}
+.status-open {
+  color: rgb(18, 181, 10);
+}
+.status-inactive {
+  color: grey;
+}
+.status-cancelled {
+  color: red;
+}
+
+/*Footer*/
+footer {
+  padding: 10px 0;
+  text-align: center;
+}
+
+footer .text-muted {
+  font-size: 14px;
+}
+
+/* ERROR HANDLING CSS */
+.error-page {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 0px #888888;
+  padding: 20px;
+  text-align: center;
+}
+
+.error-page h1 {
+  font-size: 2em;
+}
+
+.error-page p {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+
+.colon {
+  font-size: 1.5em;
+}
+/* ERROR HANDLING CSS */
+
+.container1 .card:hover {
+  transform: none; 
+  box-shadow: none;
+}
+
+
+.container1 {
+  max-width: 65%; 
+  margin: auto; 
+  padding: 20px;
+}
+
+.my-bookings-title {
+  text-align: center; 
+  margin-bottom: 40px; 
+  color: #333; 
+  
+}

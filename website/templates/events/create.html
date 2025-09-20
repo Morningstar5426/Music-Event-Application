@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% from 'bootstrap5/form.html' import render_form %}
+{% block content %}
+<!-- Shows the form for creating events -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+<div class="container1">
+  <div class="row mt-5">
+    <div class="col-md-8 offset-md-2 d-flex justify-content-center align-items-center">
+      <div class="card w-100">
+        <div class="card-body">
+          <h1 class="title">Add A Musical Event</h1>
+          <p class="subhead">Enter the details of your event.</p>
+          {{render_form(form)}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="margin-bottom: 20px;"></div>
+{% endblock %}

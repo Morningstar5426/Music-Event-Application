@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<div class="container1">  
+    <div class="row mt-5 mb-3">  
+      <div class="col-md-12">  
+        <div class="float-left">  
+          <h1 class="mb-0"><center>{{event.name}}</center></h1>  
+        </div>  
+        <div class="float-right text-right">  
+        </div>  
+      </div>  
+    </div>  
+    
+    <!-- Update Event Form -->
+    <div class="row">  
+        <div class="col-md-12">  
+              <div class="card my-3 mx-auto" style="max-width: 75%;"> 
+                <div class="card-body">  
+                    <h3>Update Event Details</h3>
+                    <div style="margin-bottom: 20px;"></div>
+                    <form method="POST" enctype="multipart/form-data">
+                        {{ form.hidden_tag() }}
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Event Title</label>
+                            {{ form.name(class="form-control", placeholder="Event Title") }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="genre" class="form-label">Genre</label>
+                            {{ form.genre(class="form-control", placeholder="Genre") }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Event Image</label>
+                            <input type="file" name="image" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            {{ form.description(class="form-control", placeholder="Description") }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="artist" class="form-label">Artist/Group</label>
+                            {{ form.artist(class="form-control", placeholder="Artist/Group") }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Date</label>
+                            {{ form.date(class="form-control", placeholder="Event Date (YYYY-MM-DD)", value=form.date.data.strftime('%Y-%m-%d') if form.date.data) }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="start_time" class="form-label">Start Time</label>
+                            {{ form.start_time(class="form-control", placeholder="Start Time") }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="end_time" class="form-label">End Time</label>
+                            {{ form.end_time(class="form-control", placeholder="End Time") }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="location" class="form-label">Location</label>
+                            {{ form.location(class="form-control", placeholder="Event Location") }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="attendees" class="form-label">Number of Attendees</label>
+                            {{ form.attendees(class="form-control", placeholder="Number of Attendees") }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="tickets" class="form-label">Ticket Details</label>
+                            {{ form.tickets(class="form-control", placeholder="Ticket Details") }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.status.label(class="form-label") }}
+                            {{ form.status(class="form-control") }}
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Update Event</button>
+                    </form>
+                </div>  
+            </div>  
+        </div>
+    </div>
+  </div> 
+
+{% endblock %}

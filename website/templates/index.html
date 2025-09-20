@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+
+
+<html lang="en">
+  {% block header %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eventify</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../static/style.css" />
+  </head>
+  
+  <body>
+    <!-- Navbar -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-white"
+    >
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand mx-auto" href="{{ url_for('main.index') }}">Eventify</a>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Browse by Category
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <!-- Dynamically generate dropdown items for each genre -->
+                  {% for genre in genres %}
+                  <a class="dropdown-item" href="{{ url_for('main.index', genre=genre) }}">{{ genre }}</a>
+                  {% endfor %}
+              </div>
+          </li>
+      </ul>
+  </div>
+  
+
+      <form class="form-inline my-2 my-lg-0" action="{{ url_for('main.search') }}" method="get">
+         <input class="form-control mr-sm-2" type="search" placeholder="Search events" aria-label="Search" name="search">
+         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+       </form>
+        </ul>
+      
+      </div>
+    </nav>
+    {% endblock %}
+
+  
+    {% block content %}
+    
+    {% if search_query %}
+    <div class="container mt-4">
+      <h2>Search Results for "{{ search_query }}"</h2>
+    </div>
+    {% endif %}
+
+    <section id="upcoming-events" class="container mt-4">
+      <h2 class="upcoming-events-title">Eventify</h2>
+      <h3 class="subhead">Display All Music Events Near You</h3>
+      <h3 class="Eventify">Upcoming Events</h3>
+      <!-- ... (Titles) ... -->
+
+
+      <!-- Events Cards -->
+      <div style="margin-bottom: 20px;"></div>
+      <div class="row">
+         {% for event in events %}
+           <!-- Card -->
+           <div class="col-md-4 mb-4">
+             <div class="card">
+              <img src="{{event.image}}" alt="{{event.name}}" class="card-img-top" />
+              <div class="card-body">
+                 <h5 class="card-title">{{ event.name }}</h5>
+                 <p><strong>Date:</strong> {{ event.date.strftime("%B %d, %Y") }}</p>
+                 <p><strong>Category:</strong> {{  event.genre }}</p>
+                 <p>
+                  <strong>Status:</strong> 
+                  <span class="status {{ 'status-' + event.status | lower }}">{{ event.status }}</span>
+                </p>
+                 <a href="{{ url_for('event.show', id=event.id) }}" class="btn btn-primary">Details</a>
+               </div>
+             </div>
+           </div>
+           <!-- Checks if the index of the loop is a multiple of 3 (and not the first item) to end and start a new row -->
+           {% if loop.index is divisibleby 3 and not loop.first %}
+             </div>
+             <div class="row">
+           {% endif %}
+         {% endfor %}
+       </div>
+     </section>
+
+     <section id="browse-categories" class="container mt-5">
+      <h3>Browse by Category</h3>
+      <div class="row">
+        <!-- First Row Category Cards -->
+        <div class="col-md-3">
+          <a href="{{ url_for('main.index', genre='Rock') }}" class="category-card">
+            <h4>Rock</h4>
+            <p>Feel the energy of rock music</p>
+          </a>
+        </div>
+        <div class="col-md-3">
+          <a href="{{ url_for('main.index', genre='Pop') }}" class="category-card">
+            <h4>Pop</h4>
+            <p>Catchy tunes and big hits</p>
+          </a>
+        </div>
+        <div class="col-md-3">
+          <a href="{{ url_for('main.index', genre='Hip-Hop') }}" class="category-card">
+            <h4>Hip Hop</h4>
+            <p>Beats and rhymes to groove to</p>
+          </a>
+        </div>
+        <div class="col-md-3">
+          <a href="{{ url_for('main.index', genre='Country') }}" class="category-card">
+            <h4>Country</h4>
+            <p>Stories and melodies from the heart</p>
+          </a>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <!-- Second Row Category Cards -->
+        <div class="col-md-4">
+          <a href="{{ url_for('main.index', genre='Jazz') }}" class="category-card">
+            <h4>Jazz</h4>
+            <p>Smooth sounds and improvisation</p>
+          </a>
+        </div>
+        <div class="col-md-4">
+          <a href="{{ url_for('main.index', genre='Blues') }}" class="category-card">
+            <h4>Blues</h4>
+            <p>The soul of music</p>
+          </a>
+        </div>
+        <div class="col-md-4">
+          <a href="{{ url_for('main.index', genre='Classical') }}" class="category-card">
+            <h4>Classical</h4>
+            <p>Timeless orchestral pieces</p>
+          </a>
+        </div>
+      </div>
+    </section>
+    
+  
+      
+        </section>
+        <!-- Search Form Section -->
+  
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="container mt-5">
+          <h4>What Our Users Say</h4>
+          <div
+            id="testimonial-carousel"
+            class="carousel slide"
+            data-ride="carousel"
+          >
+            <!-- Carousel items -->
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <blockquote class="testimonial">
+                  <p>
+                    "The best site to find and book music events! Easy to use and
+                    reliable."
+                  </p>
+                  <quote>- Jane Doe, Music Enthusiast</quote>
+                </blockquote>
+              </div>
+              <!-- More testimonials -->
+               <!-- Testimonial 2 -->
+          <div class="carousel-item">
+              <blockquote class="testimonial">
+                <p>
+                  "A fantastic platform that has brought so many memorable evenings to life. Highly recommended!"
+                </p>
+                <quote>- John Smith, Concert Goer</quote>
+              </blockquote>
+            </div>
+            <!-- Testimonial 3 -->
+            <div class="carousel-item">
+              <blockquote class="testimonial">
+                <p>
+                  "Amazing variety, great prices, and the customer service is top-notch!"
+                </p>
+                <quote>- Emily Clark, Festival Fanatic</quote>
+              </blockquote>
+            </div>
+          </div>
+            </div>
+          </div>
+        </section>
+      </div>
+  
+  
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.9/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='bootstrap.bundle.min.js') }}"></script>
+    </body>
+  </html>
+  {% endblock %}

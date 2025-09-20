@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<link rel="stylesheet" href="../static/style.css" />
+
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+
+
+
+<div class="container mt-5">
+    <h1 class="my-bookings-title">My Bookings</h1>
+    <div class="card shadow-sm">
+        <div class="card-book">
+            <div class="table-responsive">
+                <!-- Table that displays the users' booking history -->
+                <table class="table table-bordered">
+                    <thead class="bg-booking-header">
+                        <tr>
+                            <th scope="col">Booking ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Event Name</th>
+                            <th scope="col">Event Image</th>
+                            <th scope="col">Booked On</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for booking in bookings.items %}
+                        <tr>
+                            <td>{{ booking.id }}</td>
+                            <td>{{ booking.name }}</td>
+                            <td>{{ booking.number_of_tickets }}</td>
+                            <td>${{ booking.price_per_ticket}}</td>
+                            <td>{{ booking.event.name }}</td>
+                            <td>
+                                <img src="{{ booking.event.image }}" alt="Event Image" style="max-width: 100px;">
+                            </td>
+                            <td>{{ booking.created_at.strftime("%B %d, %Y") }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="7" class="text-center">No bookings found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% if bookings.total > 1 %}
+            <nav aria-label="Booking navigation">
+                <ul class="pagination justify-content-center">
+                    {% if bookings.has_prev %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('main.my_bookings', page=1) }}" aria-label="First">
+                            <span aria-hidden="true">First</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('main.my_bookings', page=bookings.prev_num) }}" aria-label="Previous">
+                            <span aria-hidden="true">Previous</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% for page in range(1, bookings.pages + 1) %}
+                    <li class="page-item {% if page == bookings.page %}active{% endif %}">
+                        <a class="page-link" href="{{ url_for('main.my_bookings', page=page) }}">{{ page }}</a>
+                    </li>
+                    {% endfor %}
+                    {% if bookings.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('main.my_bookings', page=bookings.next_num) }}" aria-label="Next">
+                            <span aria-hidden="true">Next</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('main.my_bookings', page=bookings.pages) }}" aria-label="Last">
+                            <span aria-hidden="true">Last</span>
+                        </a>
+                    </li>
+                    
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+            
+        </div>
+    </div>
+    <div style="margin-bottom: 20px;"></div>
+</div>
+
+
+{% endblock %}
